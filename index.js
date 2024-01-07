@@ -2,14 +2,16 @@
 import { createServer } from "http";
 import { Server } from "socket.io";
 import cors from "cors";
+import express from 'express';
+const app = express();
 const corsOptions = {
   origin: "https://guff-suff.netlify.app",
   methods: ["GET", "POST"],
   credentials: true,
 };
-
-const httpServer = createServer(cors(corsOptions)); // Apply cors middleware directly here
-
+app.use(cors(corsOptions));
+// const httpServer = createServer(cors(corsOptions)); // Apply cors middleware directly here
+const httpServer = createServer(app);
 const io = new Server(httpServer, {
   cors: corsOptions,
 });
